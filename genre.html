@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genres - MoviePicks</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <header>
+        <nav>
+            <a href="index.html" class="logo">MoviePicks</a>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search for movies...">
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+               <div class="dropdown">
+    <a href="genre.html" class="nav-link">Genres</a>
+    <div class="dropdown-content">
+        <a href="genre.html#action-section">Action</a>
+        <a href="genre.html#comedy-section">Comedy</a>
+        <a href="genre.html#romance-section">Romance</a>
+        <a href="genre.html#horror-section">Horror</a>
+        <a href="genre.html#thriller-section">Thriller</a>
+        <a href="genre.html#drama-section">Drama</a>
+    </div>
+</div>
+                <a href="mylist.html">My List</a>
+                <button class="login-btn">Sign In</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="search-results-section" class="movie-grid-section hidden">
+            <h2>Search Results</h2>
+            <div class="movie-grid" id="search-results-grid"></div>
+        </section>
+
+        <div id="genre-sections">
+            <section class="hero">
+                <h1>Explore your favorite genre</h1>
+                <p>Personalized recommendations just for you.</p>
+            </section>
+
+            <section class="movie-grid-section" id="action-section">
+                <h2>Action</h2>
+                <div class="movie-grid" id="action-grid"></div>
+            </section>
+            
+            <section class="movie-grid-section" id="comedy-section">
+                <h2>Comedy</h2>
+                <div class="movie-grid" id="comedy-grid"></div>
+            </section>
+
+             
+            <section class="movie-grid-section" id="romance-section">
+                <h2>Romance</h2>
+                <div class="movie-grid" id="romance-grid"></div>
+            </section>
+
+             
+            <section class="movie-grid-section" id="horror-section">
+                <h2>Horror</h2>
+                <div class="movie-grid" id="horror-grid"></div>
+            </section>
+
+            <section class="movie-grid-section" id="thriller-section">
+                <h2>Thriller</h2>
+                <div class="movie-grid" id="thriller-grid"></div>
+            </section>
+
+            <section class="movie-grid-section" id="drama-section">
+                <h2>Drama</h2>
+                <div class="movie-grid" id="drama-grid"></div>
+            </section>
+        </div>
+    </main>
+
+   <div id="movie-modal" class="modal hidden">
+    <div class="modal-content">
+        <span class="close-btn">×</span>
+        <img id="modal-img" src="" alt="Movie Poster">
+        <h2 id="modal-title">Movie Title</h2>
+        <p id="modal-description">Description goes here.</p>
+        <p><strong>Rating:</strong> <span id="modal-rating"></span></p>
+        <button class="play-btn">▶ Play Trailer</button>
+        <button class="my-list-btn">+ Add to My List</button> 
+
+        <div class="review-section">
+            <hr>
+            <h3>Rate & Review</h3>
+            <form id="review-form">
+                <div class="star-rating">
+                    <span class="star" data-value="5">&#9733;</span>
+                    <span class="star" data-value="4">&#9733;</span>
+                    <span class="star" data-value="3">&#9733;</span>
+                    <span class="star" data-value="2">&#9733;</span>
+                    <span class="star" data-value="1">&#9733;</span>
+                </div>
+                <textarea id="review-text" placeholder="Write your review here..."></textarea>
+                <button type="submit" class="submit-review-btn">Submit Review</button>
+            </form>
+            <hr>
+            <h3>User Reviews</h3>
+            <div id="reviews-container">
+                </div>
+        </div>
+    </div>
+</div>
+    <div id="trailer-modal" class="modal hidden">
+        <div class="trailer-content">
+            <span id="close-trailer-btn" class="close-btn">×</span>
+            <div class="video-container">
+                <iframe id="trailer-iframe" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="module">
+  // Import the function to initialize the app
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDc9rswaBpu-980og63L7v2-z8CCXj3-lE",
+    authDomain: "moviepicks-project.firebaseapp.com",
+    projectId: "moviepicks-project",
+    storageBucket: "moviepicks-project.appspot.com",
+    messagingSenderId: "941362009005",
+    appId: "1:941362009005:web:d4c1997792838671b20724",
+    measurementId: "G-JV4RCT5TZH"
+  };
+
+  // Initialize Firebase
+   const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  
+  // NOTE: We don't need to do anything else here. 
+  // Our main script.js file will handle getting the auth and firestore services.
+</script>
+
+ 
+</script>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>

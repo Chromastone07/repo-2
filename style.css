@@ -1,0 +1,797 @@
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* General Body & Theme */
+:root {
+    --primary-color: #e50914; /* Netflix Red for accents */
+    --background-color: #141414; /* Dark background */
+    --surface-color: #222222; /* For cards and surfaces */
+    --text-color: #ffffff;
+    --text-color-secondary: #aaaaaa;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding-top: 70px; /* Space for the fixed header */
+}
+
+/* Header & Navigation */
+header {
+    background-color: rgba(20, 20, 20, 0.8);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #333;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    height: 70px;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.search-container input {
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 1px solid #555;
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    width: 250px;
+    transition: width 0.3s ease;
+}
+
+.search-container input:focus {
+    width: 300px;
+    outline: 1px solid var(--primary-color);
+}
+
+.search-container button { display: none; }
+
+.nav-links a {
+    color: var(--text-color-secondary);
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--text-color);
+}
+
+.login-btn {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+    background-color: #f6121d;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--text-color-secondary);
+}
+
+/* Movie Grid */
+.movie-grid-section {
+    padding: 20px 40px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn-up 0.8s ease forwards;
+}
+.movie-grid-section:nth-of-type(2) { animation-delay: 0.2s; }
+.movie-grid-section:nth-of-type(3) { animation-delay: 0.4s; }
+
+@keyframes fadeIn-up {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.movie-grid-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--primary-color);
+    padding-left: 10px;
+}
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.movie-card {
+    background-color: var(--surface-color);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transform: scale(1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 15px var(--primary-color);
+}
+
+.movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Modal / Pop-up Styling */
+.modal {
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background-color: var(--surface-color);
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    animation: slideIn 0.4s ease;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close-btn {
+    color: #aaa;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--text-color);
+}
+
+#modal-img {
+    width: 200px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+#modal-title {
+    font-size: 2.5rem;
+    margin: 10px 0;
+}
+
+#modal-description {
+    line-height: 1.6;
+    color: var(--text-color-secondary);
+}
+
+#modal-rating {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.play-btn {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 20px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.play-btn:hover {
+    background-color: #f6121d;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        height: auto;
+        padding: 15px 20px;
+    }
+    .nav-links {
+        margin-top: 15px;
+    }
+    .movie-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+    .modal-content {
+        margin: 20% auto;
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+.no-results-message {
+    text-align: center;
+    padding: 50px 20px;
+    color: var(--text-color-secondary);
+}
+
+/* --- Redesigned Trailer Pop-up Styles --- */
+#trailer-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#trailer-modal .trailer-content {
+    position: relative;
+    width: 90%;
+    max-width: 900px;
+    background-color: #000;
+    border-radius: 8px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.7);
+    animation: scaleUp 0.3s ease-in-out;
+}
+
+#trailer-modal .close-btn {
+    position: absolute;
+    top: -40px;
+    right: 0px;
+    color: #fff;
+    font-size: 45px;
+    font-weight: 100;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    line-height: 1;
+}
+
+#trailer-modal .close-btn:hover {
+    transform: scale(1.2);
+}
+
+@keyframes scaleUp {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* --- Login & Sign Up Page Styles --- */
+.auth-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 70px);
+    padding: 40px 20px;
+}
+
+.auth-container {
+    background-color: var(--surface-color);
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.auth-form h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 2rem;
+    color: var(--text-color);
+}
+
+.auth-form input {
+    background-color: #333;
+    border: 1px solid #555;
+    border-radius: 5px;
+    padding: 12px 15px;
+    color: var(--text-color);
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-form input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+}
+
+.auth-form button {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+.auth-form button:hover {
+    background-color: #f6121d;
+}
+
+.google-signin p {
+    color: var(--text-color-secondary);
+    margin-bottom: 15px;
+}
+
+#google-signin-btn {
+    background-color: #fff;
+    color: #222;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#google-signin-btn:hover {
+    background-color: #eee;
+}
+
+#google-signin-btn::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.auth-switch-link {
+    margin-top: 25px;
+    color: var(--text-color-secondary);
+}
+
+.auth-switch-link a {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-switch-link a:hover {
+    text-decoration: underline;
+}
+
+.my-list-btn {
+    background-color: rgba(109, 109, 110, 0.7);
+    color: var(--text-color);
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 10px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    width: 262px;
+}
+
+.my-list-btn:hover {
+    background-color: rgba(109, 109, 110, 0.5);
+}
+
+/* --- Custom Notification Styles --- */
+#notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    transform: translateY(-150%);
+    opacity: 0;
+    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+#notification.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+#notification.success {
+    border-left: 5px solid #4CAF50; /* Green */
+}
+
+#notification.error {
+    border-left: 5px solid var(--primary-color); /* Red */
+}
+
+/* --- Dropdown Menu Styles --- */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown .nav-link {
+    /* Ensures the styling matches your other nav links */
+    display: inline-block;
+    padding: 26px 0;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--surface-color);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+    z-index: 1;
+    border-radius: 4px;
+}
+
+.dropdown-content a {
+    color: var(--text-color-secondary);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #333;
+    color: var(--text-color);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* --- Rating & Review Section Styles --- */
+
+.review-section {
+    width: 100%;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #444;
+}
+
+.review-section h3 {
+    margin: 10px 0;
+}
+
+#review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Star Rating Styles */
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse; /* This makes the stars fill left-to-right */
+    justify-content: center;
+    font-size: 2.5rem;
+}
+
+.star-rating .star {
+    color: #555; /* Default empty star color */
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+/* Hover and selected star styles */
+.star-rating:hover .star,
+.star-rating .star.hovered {
+    color: var(--primary-color);
+}
+
+.star-rating .star:hover ~ .star,
+.star-rating .star.hovered ~ .star {
+    color: var(--primary-color);
+}
+
+.star-rating .star.selected,
+.star-rating .star.selected ~ .star {
+    color: gold;
+}
+
+
+/* Text area for review */
+#review-text {
+    background-color: #333;
+    border: 1px solid #555;
+    border-radius: 5px;
+    padding: 10px;
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    min-height: 80px;
+    resize: vertical;
+}
+
+#review-text:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.submit-review-btn {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.submit-review-btn:hover {
+    background-color: #f6121d;
+}
+
+/* Container for displaying existing reviews */
+#reviews-container {
+    margin-top: 20px;
+    text-align: left;
+    width: 100%;
+}
+
+/* --- Delete Review Button Style --- */
+.delete-review-btn {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    font-size: 0.8rem;
+    padding: 0 5px;
+    margin-left: 10px;
+}
+
+.delete-review-btn:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* --- Skeleton Loader Styles --- */
+
+.skeleton-card {
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    /* This gradient and animation creates the shimmer effect */
+    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+}
+
+/* The animation that moves the gradient */
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+
+
+
+
+/* --- Dedicated Movie Page Styles --- */
+
+.movie-backdrop {
+    height: 60vh;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+}
+
+/* Adds a dark gradient overlay so text is more readable */
+.movie-backdrop::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, var(--background-color) 10%, rgba(0,0,0,0.5) 100%);
+}
+
+.movie-details-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 40px;
+    position: relative;
+    margin-top: -200px; /* Pulls the content up over the backdrop */
+}
+
+.movie-details-header {
+    display: flex;
+    gap: 40px;
+    align-items: flex-end;
+}
+
+.movie-details-poster {
+    width: 250px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.7);
+}
+
+.movie-details-info h1 {
+    font-size: 3rem;
+    margin: 0 0 10px 0;
+}
+
+.movie-details-info h1 span {
+    font-weight: 400;
+    color: var(--text-color-secondary);
+}
+
+.movie-details-info p {
+    margin: 8px 0;
+    font-size: 1.1rem;
+}
+
+.movie-details-info em {
+    color: var(--text-color-secondary);
+    font-style: italic;
+}
+
+.movie-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.movie-details-body {
+    padding-top: 40px;
+}
+
+.movie-details-body h2 {
+    font-size: 1.8rem;
+    border-left: 4px solid var(--primary-color);
+    padding-left: 10px;
+    margin: 40px 0 20px 0;
+}
+
+/* Cast Grid Styling */
+.cast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 20px;
+}
+
+.cast-member {
+    text-align: center;
+}
+
+.cast-member img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    background-color: var(--surface-color);
+}
+
+.cast-member p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
+.cast-member p:last-child {
+    color: var(--text-color-secondary);
+    font-size: 0.8rem;
+}
+
+
+/* Responsive styles for the movie page */
+@media (max-width: 768px) {
+    .movie-details-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .movie-details-content {
+        margin-top: -250px;
+    }
+    
+    .movie-actions {
+        justify-content: center;
+    }
+}

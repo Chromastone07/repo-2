@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MoviePicks</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <header>
+        <nav>
+            <a href="index.html" class="logo">MoviePicks</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <div class="dropdown">
+    <a href="genre.html" class="nav-link">Genres</a>
+    <div class="dropdown-content">
+        <a href="genre.html#action-section">Action</a>
+        <a href="genre.html#comedy-section">Comedy</a>
+        <a href="genre.html#romance-section">Romance</a>
+        <a href="genre.html#horror-section">Horror</a>
+        <a href="genre.html#thriller-section">Thriller</a>
+        <a href="genre.html#drama-section">Drama</a>
+    </div>
+</div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="auth-page">
+        <div class="auth-container">
+            <form id="login-form" class="auth-form">
+                <h2>Login</h2>
+                <input type="email" id="login-email" placeholder="Email" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+
+            <div class="google-signin">
+                <p>OR</p>
+                <button id="google-signin-btn">Sign in with Google</button>
+            </div>
+
+            <p class="auth-switch-link">
+                Don't have an account? <a href="signup.html">Sign Up</a>
+            </p>
+        </div>
+    </main>
+ <script type="module">
+  // Import the function to initialize the app
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDc9rswaBpu-980og63L7v2-z8CCXj3-lE",
+    authDomain: "moviepicks-project.firebaseapp.com",
+    projectId: "moviepicks-project",
+    storageBucket: "moviepicks-project.appspot.com",
+    messagingSenderId: "941362009005",
+    appId: "1:941362009005:web:d4c1997792838671b20724",
+    measurementId: "G-JV4RCT5TZH"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  
+  // NOTE: We don't need to do anything else here. 
+  // Our main script.js file will handle getting the auth and firestore services.
+</script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>

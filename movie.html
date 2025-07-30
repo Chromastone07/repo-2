@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title> <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="notification"></div>
+
+    <header>
+        <nav>
+            <a href="index.html" class="logo">MoviePicks</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="genre.html">Genres</a>
+                <a href="mylist.html">My List</a>
+                <button class="login-btn">Sign In</button>
+            </div>
+        </nav>
+    </header>
+
+    <main id="movie-details-container">
+        <div class="skeleton-details"></div>
+    </main>
+
+     <!-- <div class="review-section">
+            <hr>
+            <h3>Rate & Review</h3>
+            <form id="review-form">
+                <div class="star-rating">
+                    <span class="star" data-value="5">&#9733;</span>
+                    <span class="star" data-value="4">&#9733;</span>
+                    <span class="star" data-value="3">&#9733;</span>
+                    <span class="star" data-value="2">&#9733;</span>
+                    <span class="star" data-value="1">&#9733;</span>
+                </div>
+                <textarea id="review-text" placeholder="Write your review here..."></textarea>
+                <button type="submit" class="submit-review-btn">Submit Review</button>
+            </form>
+            <hr>
+            <h3>User Reviews</h3>
+            <div id="reviews-container">
+                </div>
+        </div>
+    </div>
+</div> -->
+    
+ <div id="trailer-modal" class="modal hidden">
+        <div class="trailer-content">
+            <span id="close-trailer-btn" class="close-btn">×</span>
+            <div class="video-container">
+                <iframe id="trailer-iframe" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+     const firebaseConfig = {
+    apiKey: "AIzaSyDc9rswaBpu-980og63L7v2-z8CCXj3-lE",
+    authDomain: "moviepicks-project.firebaseapp.com",
+    projectId: "moviepicks-project",
+    storageBucket: "moviepicks-project.appspot.com",
+    messagingSenderId: "941362009005",
+    appId: "1:941362009005:web:d4c1997792838671b20724",
+    measurementId: "G-JV4RCT5TZH"
+  };
+
+      const app = initializeApp(firebaseConfig);
+    </script>
+    
+    <script type="module" src="script.js"></script>
+</body>
+</html>

@@ -12,7 +12,14 @@
 
     <header>
         <nav>
-            <a href="index.html" class="logo">moviesbucket</a>
+           <a href="index.html" class="logo">
+    <span class="logo-main-text">
+        M
+        <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9v6a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-1a7 7 0 0 1 7-7 7 7 0 0 1 7 7h-1a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-6a9 9 0 0 0-9-9z"/></svg>
+        VIES
+    </span>
+    <span class="logo-bucket-text">BUCKET</span>
+</a>
             <div class="search-container">
                 <input type="text" id="search-input" placeholder="Search for movies...">
             </div>
@@ -37,26 +44,44 @@
 
     <main>
         <section id="search-results-section" class="movie-grid-section hidden">
-            <h2>Search Results</h2>
-            <div class="movie-grid" id="search-results-grid"></div>
-        </section>
+    <h2>Search Results</h2>
+    <div class="movie-grid" id="search-results-grid"></div>
+    <button id="filter-load-more-btn" class="load-more-btn hidden">Load More</button>
+</section>
 
         <div id="genre-sections">
-            <section class="hero">
-                <h1>Explore your favorite Movies</h1>
-                <p>Personalized recommendations just for you.</p>
-            </section>
+           <section class="hero">
+    <h1>Explore your favorite Movies</h1>
+    <p>Personalized recommendations just for you.</p>
+
+    <div class="filter-bar">
+        <button class="filter-btn active" data-filter="popular">Popular</button>
+        <button class="filter-btn" data-filter="hollywood">Hollywood</button>
+        <button class="filter-btn" data-filter="bollywood">Bollywood</button>
+        <button class="filter-btn" data-filter="anime">Anime</button>
+    </div>
+</section>
 
             <section class="movie-grid-section">
-                <h2>Recommendations</h2>
-                <div class="movie-grid" id="recommendations-grid"></div>
-            </section>
+    <h2>Recommendations</h2>
+    <div class="movie-grid" id="recommendations-grid"></div>
+    <button class="load-more-btn" data-endpoint="/movie/popular">Load More</button>
+</section>
+
             
             <section class="movie-grid-section">
-                <h2>For You</h2>
-                <div class="movie-grid" id="for-you-grid"></div>
-            </section>
+    <h2>For You</h2>
+    <div class="movie-grid" id="for-you-grid"></div>
+    <button class="load-more-btn" data-endpoint="/movie/top_rated">Load More</button>
+</section>
+
+<section id="recommendation-engine-section" class="movie-grid-section hidden">
+    <h2 id="recommendation-title"></h2>
+    <div class="movie-grid" id="recommendation-engine-grid"></div>
+    <button id="recs-load-more-btn" class="load-more-btn hidden">Load More</button>
+</section>
         </div>
+        
     </main>
 
    <div id="movie-modal" class="modal hidden">

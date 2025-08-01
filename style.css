@@ -41,11 +41,42 @@ nav {
     height: 70px;
 }
 
+/* --- Updated Logo Styling --- */
+
+/* --- Recreated Logo Styles --- */
+
+/* The main <a> tag container */
 .logo {
-    font-size: 1.8rem;
-    font-weight: 700;
+    display: flex;
+    align-items: flex-end; /* Aligns BUCKET at the bottom */
+    gap: 8px;
+    font-weight: 800; /* Extra bold */
     color: var(--primary-color);
     text-decoration: none;
+    line-height: 1;
+}
+
+/* "MOVIES" part of the logo */
+.logo-main-text {
+    font-size: 2.2rem;
+    display: flex;
+    align-items: center;
+}
+
+/* Headphone icon SVG */
+.logo-icon {
+    width: 2.1rem;
+    height: 2.1rem;
+    fill: #fff; /* White icon color */
+    margin: 0 -4px; /* Adjust spacing around the icon */
+    transform: translateY(-2px); /* Fine-tune vertical position */
+}
+
+/* "BUCKET" part of the logo */
+.logo-bucket-text {
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding-bottom: 4px; /* Adjust vertical alignment */
 }
 
 .search-container input {
@@ -851,3 +882,115 @@ nav {
 
 
 
+
+
+/* --- Quick Add/Remove Button Styles --- */
+
+/* This makes the movie card a positioning container for the button */
+.movie-card {
+    position: relative;
+}
+
+.quick-add-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 10;
+    
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 50%; /* Makes it a circle */
+    width: 32px;
+    height: 32px;
+    
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 28px; /* Helps center the icon */
+    text-align: center;
+    cursor: pointer;
+    
+    /* Hide it by default */
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Show the button when the user hovers over the movie card */
+.movie-card:hover .quick-add-btn {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Style for when a movie is already in the list */
+.quick-add-btn.added {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* --- Load More Button Style --- */
+.load-more-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    background-color: var(--surface-color);
+    border: 1px solid #555;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.load-more-btn:hover {
+    background-color: #333;
+}
+
+/* --- Filter Bar Styles --- */
+.filter-bar {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.filter-btn {
+    background-color: var(--surface-color);
+    color: var(--text-color-secondary);
+    border: 1px solid #444;
+    padding: 8px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    background-color: #333;
+    color: var(--text-color);
+}
+
+/* Style for the currently selected filter button */
+.filter-btn.active {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border-color: var(--primary-color);
+    font-weight: 600;
+}
+
+
+
+
+
+
+.disclaimer {
+    font-size: 0.8rem;
+    color: var(--text-color-secondary);
+    margin-top: 20px;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.4;
+}

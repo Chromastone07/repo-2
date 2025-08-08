@@ -1,6 +1,4 @@
-// SECTION 1: FIREBASE SETUP & AUTHENTICATION
 
-// Import the functions from the Firebase SDKs
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { 
     getAuth, 
@@ -21,7 +19,6 @@ import {
     arrayRemove
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-//  web app's Firebase configuration
  const firebaseConfig = {
     apiKey: "AIzaSyDc9rswaBpu-980og63L7v2-z8CCXj3-lE",
     authDomain: "moviepicks-project.firebaseapp.com",
@@ -32,19 +29,16 @@ import {
     measurementId: "G-JV4RCT5TZH"
   };
 
-// Initialize Firebase 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Global variables 
 let userWatchlist = [];
 let currentRating = 0;
 let currentMovieReviews = [];
 let currentPages = {};
 let currentFilter = { endpoint: null, page: 1 };
 
-// Custom Notification Function
 const notification = document.getElementById('notification');
 let notificationTimeout;
 function showNotification(message, type = 'success') {
@@ -58,7 +52,6 @@ function showNotification(message, type = 'success') {
     }, 3000);
 }
 
-//  Login & Signup Page Logic 
 const signupForm = document.getElementById('signup-form');
 if (signupForm) {
     signupForm.addEventListener('submit', (e) => {
@@ -102,7 +95,6 @@ if (googleBtn) {
     });
 }
 
-// --- Manage Login State Across All Pages ---
 onAuthStateChanged(auth, async (user) => {
     const loginButtons = document.querySelectorAll('.login-btn');
     const recommendationSection = document.getElementById('recommendation-engine-section');
@@ -133,15 +125,11 @@ onAuthStateChanged(auth, async (user) => {
     }
 });
 
-// SECTION 2: MOVIE Browse & API LOGIC
-
-
-// --- API Configuration ---
 const API_KEY = '2fdc6fe64a5b4fe596a082980edf0487';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
-// Element Selectors
+
 const main = document.querySelector('main');
 const searchInput = document.getElementById('search-input');
 const detailsModal = document.getElementById('movie-modal');
@@ -159,7 +147,7 @@ const searchResultsGrid = document.querySelector('#search-results-grid');
 const searchResultsSection = document.querySelector('#search-results-section');
 const genreSections = document.querySelector('#genre-sections');
 
-// --- "Ratings & Reviews" Functions ---
+
 function displayReviews(reviews = []) {
     const reviewsContainer = document.getElementById('reviews-container');
     if (!reviewsContainer) return;
@@ -205,7 +193,7 @@ async function loadPersonalizedRecommendations() {
     const recommendationSection = document.getElementById('recommendation-engine-section');
     const recommendationTitle = document.getElementById('recommendation-title');
     const recommendationGrid = document.getElementById('recommendation-engine-grid');
-    const loadMoreBtn = document.getElementById('recs-load-more-btn'); // Find the new button
+    const loadMoreBtn = document.getElementById('recs-load-more-btn'); 
 
     if (!auth.currentUser || !recommendationSection) return;
 
@@ -305,7 +293,7 @@ function initializeStarRating() {
     });
 }
 
-// --- "My List" Database Functions ---
+
 async function addToMyList(movieId) {
     const user = auth.currentUser;
     if (!user) { showNotification("Please sign in to add movies to your list.", 'error'); setTimeout(() => window.location.href = 'login.html', 1500); return; }
@@ -359,7 +347,7 @@ async function loadMyList() {
     }
 }
 
-// --- General API & Display Functions ---
+
 async function fetchApi(endpoint) { const url = `${BASE_URL}${endpoint}${endpoint.includes('?') ? '&' : '?'}api_key=${API_KEY}`; try { const response = await fetch(url); if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`); return await response.json(); } catch (error) { console.error('API fetch error:', error); return null; } }
 function displaySkeletons(container) { if (!container) return; container.innerHTML = ''; for (let i = 0; i < 10; i++) { container.innerHTML += `<div class="movie-card skeleton-card"></div>`; } }
 function displayMovies(movies, container, append = false) { if (!container) return; if (!append) { container.innerHTML = ''; } movies.forEach(movie => { if (movie && movie.poster_path) { const isInWatchlist = userWatchlist.includes(String(movie.id)); const buttonIcon = isInWatchlist ? '✓' : '+'; const buttonClass = isInWatchlist ? 'quick-add-btn added' : 'quick-add-btn'; const movieCardHTML = `<div class="movie-card" data-id="${movie.id}"><button class="${buttonClass}" data-id="${movie.id}">${buttonIcon}</button><img src="${IMG_URL}${movie.poster_path}" alt="${movie.title}"></div>`; container.innerHTML += movieCardHTML; } }); }
@@ -371,7 +359,7 @@ async function handleFilterClick(filter) { if (!searchResultsSection || !genreSe
 function updateMyListButton(movieId) { const allMyListBtns = document.querySelectorAll('.my-list-btn'); allMyListBtns.forEach(myListBtn => { if (myListBtn) { if (userWatchlist.includes(String(movieId))) { myListBtn.textContent = '✓ Remove from My List'; } else { myListBtn.textContent = '+ Add to My List'; } } }); }
 async function renderMoviePage(movieId) { const container = document.getElementById('movie-details-container'); if (!container) return; container.innerHTML = `<div class="skeleton-details"></div>`; const [details, videos, credits] = await Promise.all([ fetchApi(`/movie/${movieId}`), fetchApi(`/movie/${movieId}/videos`), fetchApi(`/movie/${movieId}/credits`) ]); if (!details) { container.innerHTML = `<h1>Movie not found</h1>`; return; } document.title = `${details.title} - MoviePicks`; const trailer = videos?.results?.find(v => v.site === 'YouTube' && v.type === 'Trailer'); const director = credits?.crew?.find(p => p.job === 'Director'); const mainCast = credits?.cast?.slice(0, 5) || []; container.innerHTML = `<div class="movie-backdrop" style="background-image: url(${IMG_URL}${details.backdrop_path})"></div> <div class="movie-details-content" data-id="${details.id}"> <div class="movie-details-header"> <img src="${details.poster_path ? IMG_URL + details.poster_path : 'placeholder.jpg'}" alt="${details.title}" class="movie-details-poster"> <div class="movie-details-info"> <h1>${details.title} <span>(${new Date(details.release_date).getFullYear()})</span></h1> <p><strong>Rating:</strong> ${details.vote_average.toFixed(1)} / 10</p> ${director ? `<p><strong>Director:</strong> ${director.name}</p>` : ''} <p><em>${details.tagline}</em></p> <div class="movie-actions"> ${trailer ? `<button class="play-btn" data-trailer-id="${trailer.key}">▶ Play Trailer</button>` : ''} <button class="my-list-btn">+ Add to My List</button> </div> </div> </div> <div class="movie-details-body"> <h2>Overview</h2> <p>${details.overview}</p> <h2>Cast</h2> <div class="cast-grid"> ${mainCast.map(actor => `<div class="cast-member"><img src="${actor.profile_path ? IMG_URL + actor.profile_path : 'placeholder.jpg'}" alt="${actor.name}"><p><strong>${actor.name}</strong></p><p>${actor.character}</p></div>`).join('')} </div> <div class="review-section"> <hr><h3>Rate & Review</h3> <form id="review-form"><div class="star-rating"><span class="star" data-value="5">★</span><span class="star" data-value="4">★</span><span class="star" data-value="3">★</span><span class="star" data-value="2">★</span><span class="star" data-value="1">★</span></div><textarea id="review-text" placeholder="Write your review here..."></textarea><button type="submit" class="submit-review-btn">Submit Review</button></form> <hr><h3>User Reviews</h3> <div id="reviews-container"></div> </div> </div> </div>`; updateMyListButton(details.id); loadAndDisplayReviews(details.id); initializeStarRating(); const reviewFormOnPage = document.getElementById('review-form'); if (reviewFormOnPage) { reviewFormOnPage.addEventListener('submit', handleReviewSubmit); } }
 
-// --- Page Initialization ---
+
 async function initializePage() {
     const urlParams = new URLSearchParams(window.location.search);
     const movieId = urlParams.get('id');
@@ -464,5 +452,5 @@ window.addEventListener('keydown', (event) => {
     }
 });
 
-// Start the App
+
 initializePage();

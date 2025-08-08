@@ -1,7 +1,4 @@
 
-
-
-
 html {
     scroll-behavior: smooth;
 }
@@ -22,7 +19,7 @@ body {
     padding-top: 70px; 
 }
 
-/* Header & Navigation */
+
 header {
     background-color: rgba(20, 20, 20, 0.8);
     backdrop-filter: blur(10px);
@@ -41,43 +38,41 @@ nav {
     height: 70px;
 }
 
-/* --- Updated Logo Styling --- */
 
-/* --- Recreated Logo Styles --- */
 
-/* The main <a> tag container */
+
+
+
 .logo {
     display: flex;
-    align-items: flex-end; /* Aligns BUCKET at the bottom */
+    align-items: flex-end; 
     gap: 8px;
-    font-weight: 800; /* Extra bold */
+    font-weight: 800; 
     color: var(--primary-color);
     text-decoration: none;
     line-height: 1;
 }
 
-/* "MOVIES" part of the logo */
+
 .logo-main-text {
     font-size: 2.2rem;
     display: flex;
     align-items: center;
 }
 
-/* Headphone icon SVG */
+
 .logo-icon {
     width: 2.1rem;
     height: 2.1rem;
-    fill: #fff; /* White icon color */
-    margin: 0 -4px; /* Adjust spacing around the icon */
-    transform: translateY(-2px); /* Fine-tune vertical position */
+    fill: #fff; 
+    margin: 0 -4px; 
+    transform: translateY(-2px); 
 }
 
-/* "BUCKET" part of the logo */
 .logo-bucket-text {
     font-size: 0.8rem;
     font-weight: 700;
-    padding-bottom: 4px; /* Adjust vertical alignment */
-}
+    padding-bottom: 4px; }
 
 .search-container input {
     padding: 8px 15px;
@@ -123,7 +118,7 @@ nav {
     background-color: #f6121d;
 }
 
-/* Hero Section */
+
 .hero {
     text-align: center;
     padding: 60px 20px;
@@ -139,7 +134,7 @@ nav {
     color: var(--text-color-secondary);
 }
 
-/* Movie Grid */
+
 .movie-grid-section {
     padding: 20px 40px;
     opacity: 0;
@@ -191,7 +186,7 @@ nav {
     display: block;
 }
 
-/* Modal */
+
 .modal {
     position: fixed;
     z-index: 2000;
@@ -282,18 +277,73 @@ nav {
     background-color: #f6121d;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     nav {
-        flex-direction: column;
+        flex-direction: column; 
         height: auto;
         padding: 15px 20px;
+        gap: 15px;
     }
+
     .nav-links {
-        margin-top: 15px;
+        flex-direction: column; 
+        width: 100%;
+        gap: 20px;
+    }
+
+    .search-container {
+         width: 100%;
+    }
+    .search-container input {
+        width: 100%;
     }
     .movie-grid {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-top: 60px; 
+    }
+    nav {
+        padding: 10px 15px;
+    }
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    .movie-grid-section {
+        padding: 15px;
+    }
+    .movie-grid-section h2 {
+        font-size: 1.5rem;
+    }
+    .movie-grid {
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 15px;
+    }
+    .movie-details-info h1 {
+        font-size: 2rem;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .movie-details-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .movie-details-content {
+        margin-top: -250px;
+        padding: 20px;
+    }
+
+    .movie-actions {
+        justify-content: center;
+    }
+
     .modal-content {
         margin: 20% auto;
     }
@@ -843,20 +893,18 @@ nav {
 }
 
 
-
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .movie-details-header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+        gap: 30px;
     }
-    
-    .movie-details-content {
-        margin-top: -250px;
+    .movie-details-poster {
+        width: 200px;
     }
-    
-    .movie-actions {
-        justify-content: center;
+    .movie-details-info h1 {
+        font-size: 2.5rem;
+    }
+    .profile-stats {
+        gap: 20px;
     }
 }
 
@@ -864,29 +912,6 @@ nav {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* --- Quick Add/Remove Button Styles --- */
-
-/* This makes the movie card a positioning container for the button */
 .movie-card {
     position: relative;
 }
@@ -900,35 +925,31 @@ nav {
     background-color: rgba(0, 0, 0, 0.7);
     color: #fff;
     border: 1px solid #fff;
-    border-radius: 50%; /* Makes it a circle */
+    border-radius: 50%; 
     width: 32px;
     height: 32px;
     
     font-size: 1.5rem;
     font-weight: bold;
-    line-height: 28px; /* Helps center the icon */
+    line-height: 28px; 
     text-align: center;
     cursor: pointer;
     
-    /* Hide it by default */
     opacity: 0;
     transform: scale(0.8);
     transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-/* Show the button when the user hovers over the movie card */
 .movie-card:hover .quick-add-btn {
     opacity: 1;
     transform: scale(1);
 }
 
-/* Style for when a movie is already in the list */
 .quick-add-btn.added {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
 }
 
-/* --- Load More Button Style --- */
 .load-more-btn {
     display: block;
     margin: 20px auto;
@@ -947,7 +968,6 @@ nav {
     background-color: #333;
 }
 
-/* --- Filter Bar Styles --- */
 .filter-bar {
     margin-top: 30px;
     display: flex;
@@ -972,7 +992,6 @@ nav {
     color: var(--text-color);
 }
 
-/* Style for the currently selected filter button */
 .filter-btn.active {
     background-color: var(--primary-color);
     color: var(--text-color);
